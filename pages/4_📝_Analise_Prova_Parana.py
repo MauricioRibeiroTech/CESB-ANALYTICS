@@ -4,7 +4,11 @@ import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 
-# Configurações da página (adotando o estilo do script de referência)
+# ---------------------------------------------
+# CONFIGURAÇÃO DE PÁGINA E CSS (Mistura de estilos)
+# ---------------------------------------------
+
+# Configurações da página (Mantidas as configurações de layout e expansão)
 st.set_page_config(
     page_title="CESB Analytic - Prova Paraná", 
     page_icon="📊",
@@ -12,31 +16,27 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ---------------------------------------------
-# CSS personalizado para um visual escuro e moderno
-# ---------------------------------------------
+# CSS personalizado (Combinando o estilo escuro do corpo principal com o estilo da sidebar do arquivo anexado)
 st.markdown("""
 <style>
+    /* Estilo do Corpo Principal (Mantido do pedido anterior) */
     .main {
-        /* Fundo com gradiente escuro */
         background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
         color: #ffffff;
     }
-    .metric-card {
-        /* Estilo para caixas de métricas se forem adicionadas */
-        border-radius: 15px;
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(10px);
-        text-align: center;
-        margin-bottom: 15px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: transform 0.3s ease;
+    
+    /* Estilo para a Sidebar (Extraído do 🏠_Página_Principal.py) */
+    /* Garante que o conteúdo da sidebar tenha fundo branco */
+    .sidebar .sidebar-content, .st-emotion-cache-vk3ypz {
+        background-color: #ffffff;
     }
-    .metric-card:hover {
-        transform: translateY(-5px);
+    
+    /* Garante que os títulos na sidebar sejam azuis (do arquivo anexado) */
+    .st-emotion-cache-1ftmdp5 h1, .st-emotion-cache-1ftmdp5 h2, .st-emotion-cache-1ftmdp5 h3 {
+        color: #1E40AF;
     }
-    /* Estilo para os cabeçalhos de seção */
+
+    /* Estilos do Conteúdo Principal */
     .section-header {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 20px 30px;
@@ -44,30 +44,18 @@ st.markdown("""
         margin: 30px 0;
         border-left: 5px solid #ff6b6b;
     }
-    /* Estilo para informações na sidebar */
-    .sidebar-info {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 10px;
-        border-radius: 8px;
-        margin: 5px 0;
-        font-size: 12px;
-    }
-    /* Estilo do título principal da página */
-    .st-emotion-cache-183n00o h1 {
-        font-weight: 700;
-        color: #fff;
-    }
-    /* Mudar o template dos gráficos para escuro */
-    .js-plotly-plot .plotly .modebar {
-        background: transparent !important;
+    /* Cores gerais do texto */
+    h1, h2, h3, h4, h5, h6 {
+        color: white; /* Garante que os títulos no corpo principal fiquem brancos */
     }
 </style>
 """, unsafe_allow_html=True)
 
 
 # --------------------------
-# SIDEBAR (Implementação com o texto e estilo solicitados)
+# SIDEBAR (Implementação IDÊNTICA ao arquivo anexado)
 # --------------------------
+with st.sidebar:
     st.markdown("""
     <div style="text-align: center; margin-bottom: 30px;">
         <h1 style="font-size: 24px;">CESB Analytic</h1>
@@ -75,18 +63,18 @@ st.markdown("""
     </div>
     """, unsafe_allow_html=True)
   
-    # Verificar se existem dados
+    # Separador e Informações
     st.markdown("---")
     st.markdown("""
     <div style="text-align: center; margin-top: 20px;">
-        <p style="font-size: 14px;">Colégio Estadual São Braz</p>
-        <p style="font-size: 12px;">Recomposição da Aprendizagem</p>
+        <p style="font-size: 14px; color: black;">Colégio Estadual São Braz</p>
+        <p style="font-size: 12px; color: black;">Recomposição da Aprendizagem</p>
     </div>
     """, unsafe_allow_html=True)
 
 
 # --------------------------
-# HEADER PRINCIPAL
+# HEADER PRINCIPAL (Ajustado para o tema escuro)
 # --------------------------
 st.markdown("""
 <div style="text-align: center; margin-bottom: 30px;">
@@ -94,7 +82,7 @@ st.markdown("""
     <p style="color: #e0f2fe; font-size: 18px;">Comparativo entre a 1ª e 2ª Edição</p>
 </div>
 """, unsafe_allow_html=True)
-st.markdown("---") # Separador
+st.markdown("---")
 
 
 # Lista dos arquivos CSV
@@ -200,12 +188,12 @@ def criar_grafico_radar(disciplinas, valores_aluno, medias_turma, edicao, aluno,
         line=dict(color='red', width=3)
     ))
 
-    # Média da Turma (Linha Tracejada - Azul)
+    # Média da Turma (Linha Tracejada - Ciano/Azul Claro)
     fig_radar.add_trace(go.Scatterpolar(
         r=medias_turma,
         theta=disciplinas,
         name=f'Média da Turma',
-        line=dict(color='cyan', dash='dash', width=2) # Trocado para ciano para melhor contraste no tema escuro
+        line=dict(color='cyan', dash='dash', width=2)
     ))
 
     fig_radar.update_layout(
@@ -253,7 +241,7 @@ if df_turmas_9_list and all(df is not None for df in df_turmas_9_list):
     fig_9 = px.bar(df_comparativo_9, x="Disciplina", y="Média de Acertos", color="Edição", facet_col="Turma", barmode="group",
                    category_orders={"Edição": ["1ª Edição", "2ª Edição"]}, text_auto=".2f", labels={"Média de Acertos": "Média de Acertos (%)"}, height=500)
     fig_9.update_yaxes(range=[0, 100], title_text="Média de Acertos (%)")
-    fig_9.update_layout(template='plotly_dark') # Aplica o tema escuro
+    fig_9.update_layout(template='plotly_dark')
     st.plotly_chart(fig_9, use_container_width=True)
 else:
     st.warning("Dados incompletos ou disciplinas não-comuns suficientes para a comparação das turmas do 9º ano.")
@@ -269,7 +257,7 @@ if df_turmas_3_list and all(df is not None for df in df_turmas_3_list):
     fig_3 = px.bar(df_comparativo_3, x="Disciplina", y="Média de Acertos", color="Edição", facet_col="Turma", barmode="group",
                    category_orders={"Edição": ["1ª Edição", "2ª Edição"]}, text_auto=".2f", labels={"Média de Acertos": "Média de Acertos (%)"}, height=500)
     fig_3.update_yaxes(range=[0, 100], title_text="Média de Acertos (%)")
-    fig_3.update_layout(template='plotly_dark') # Aplica o tema escuro
+    fig_3.update_layout(template='plotly_dark')
     st.plotly_chart(fig_3, use_container_width=True)
 else:
     st.warning("Dados incompletos ou disciplinas não-comuns suficientes para a comparação das turmas do 3º ano.")
@@ -281,7 +269,7 @@ st.markdown("---")
 st.markdown('<div class="section-header"><h3>2. Comparativo Aluno vs. Média da Turma (Gráficos de Radar por Edição)</h3></div>', unsafe_allow_html=True)
 st.markdown("Os gráficos de radar mostram o percentual de acertos de um aluno selecionado em comparação com a média da turma, em cada edição separadamente.")
 
-# Seleção de Turma
+# Seleção de Turma 
 todas_as_turmas = sorted(list(dados_turmas.keys()))
 turma_selecionada = st.selectbox("Selecione a Turma para Análise Individual", todas_as_turmas)
 
