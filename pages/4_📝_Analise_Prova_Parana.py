@@ -68,7 +68,7 @@ st.markdown("""
 # --------------------------
 # SIDEBAR (Implementação com o texto e estilo solicitados)
 # --------------------------
-st.markdown("""
+    st.markdown("""
     <div style="text-align: center; margin-bottom: 30px;">
         <h1 style="font-size: 24px;">CESB Analytic</h1>
         <h2 style="font-size: 18px;">Decifrando Potenciais, Transformando Aprendizagens</h2>
@@ -83,6 +83,7 @@ st.markdown("""
         <p style="font-size: 12px;">Recomposição da Aprendizagem</p>
     </div>
     """, unsafe_allow_html=True)
+
 
 # --------------------------
 # HEADER PRINCIPAL
