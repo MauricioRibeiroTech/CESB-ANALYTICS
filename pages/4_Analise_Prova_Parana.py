@@ -112,7 +112,7 @@ COLUNA_CGM = 'cgm'
 def carregar_e_limpar_dados(caminho_arquivo):
     """Carrega o CSV, padroniza as colunas de percentual, trata NaN e converte vírgula para ponto."""
     try:
-        df = pd.read_csv("pages/"+caminho_arquivo, sep=';', decimal=',')
+        df = pd.read_csv('pages/'+caminho_arquivo, sep=';', decimal=',')
         
         colunas_para_ignorar = {COLUNA_ALUNO, COLUNA_CGM, 'percAcertosAluno', 'percAcertosGeral', 'presenca'}
         colunas_percentual = [col for col in df.columns if col not in colunas_para_ignorar]
