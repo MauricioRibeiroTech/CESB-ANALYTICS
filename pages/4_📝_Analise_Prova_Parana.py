@@ -68,19 +68,21 @@ st.markdown("""
 # --------------------------
 # SIDEBAR (Implementação com o texto e estilo solicitados)
 # --------------------------
-st.sidebar.markdown(f"""
-<div style="text-align: center; margin-top: 10px;">
-    <h2 style="color: white; font-weight: 700; margin-bottom: 5px;">CESB Analytic</h2>
-    <p style="color: #a8b2d1; font-size: 14px; margin-bottom: 20px;">Decifrando Potenciais, Transformando Aprendizagens</p>
-</div>
-<hr style="border-color: rgba(255, 255, 255, 0.1); margin-bottom: 15px;">
-<div class="sidebar-info" style="text-align: center; font-size: 14px; color: #ffffff;">
-    <strong>Colégio Estadual São Braz</strong><br>
-    Recomposição da Aprendizagem
-</div>
-<hr style="border-color: rgba(255, 255, 255, 0.1); margin-top: 15px;">
-""", unsafe_allow_html=True)
-
+st.markdown("""
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="font-size: 24px;">CESB Analytic</h1>
+        <h2 style="font-size: 18px;">Decifrando Potenciais, Transformando Aprendizagens</h2>
+    </div>
+    """, unsafe_allow_html=True)
+  
+    # Verificar se existem dados
+    st.markdown("---")
+    st.markdown("""
+    <div style="text-align: center; margin-top: 20px;">
+        <p style="font-size: 14px;">Colégio Estadual São Braz</p>
+        <p style="font-size: 12px;">Recomposição da Aprendizagem</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 # --------------------------
 # HEADER PRINCIPAL
